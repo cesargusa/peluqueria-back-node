@@ -12,7 +12,7 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 });
-app.use(usuariosRoutes)
+app.use("/usuarios",usuariosRoutes)
 app.listen(PORT, () =>{
     console.log(`Servidor ejecutandose en el puerto ${PORT}`)
 })

@@ -11,7 +11,7 @@ const getAllUsuarios = async (req, res) => {
 const getUsuarioId = async (req, res) => {
     const con = await conexion
     const { id } = await req.params
-    const result = await con.query("SELECT * FROM usuarios WHERE id=? ", id)
+    const [result] = await con.query("SELECT * FROM usuarios WHERE id=? ", id)
     res.json(result)
 }
 
