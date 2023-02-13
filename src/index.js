@@ -25,3 +25,4 @@ app.listen(PORT, () =>{
     console.log(`Servidor ejecutandose en el puerto ${PORT}`)
 })
 
+app.use("/storage",express.static("./src/storage/imgs"))

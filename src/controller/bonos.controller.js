@@ -9,6 +9,15 @@ const result = await con.query("SELECT * FROM bonos")
 res.json(result)
 
 }
+const sendBonos= ({data},file)=>{
+    const form = new FormData()
+    form.append('file',file,'form-data')
+    
+    return fetch(`localhost:2222/bonos/create`,form,{
+        methods:"POST"
+    })
+}
+
 const getBonoId = async (req, res) => {
     const con = await conexion
     const { id } = await req.params
@@ -19,9 +28,9 @@ const getBonoId = async (req, res) => {
 const createBono = async (req, res) => {
     try {
 
-        const { idCategoria, nombreBono, descripcion, numeroBonos, precio,urlFoto, creationDate } = req.body
+        const { idCategoria, nombreBono, descripcion, numeroBonos, precio, creationDate } = req.body
         const bono = {
-            idCategoria, nombreBono, descripcion, numeroBonos, precio,urlFoto, creationDate
+            idCategoria, nombreBono, descripcion, numeroBonos, precio,urlFoto:req.file.filename, creationDate
         }
         const con = await conexion
         const result = await con.query("INSERT INTO bonos SET ?", bono)
@@ -73,5 +82,6 @@ export const methods = {
     getBonoId,
     createBono,
     updateBono,
-    deleteBono
+    deleteBono,
+    sendBonos
 }
